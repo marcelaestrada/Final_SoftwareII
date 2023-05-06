@@ -13,5 +13,6 @@ namespace FinalSoftware.Models
         public string Hora { get; set; }
         public DateTime Fecha { get; set; }
         public string IP { get; set; }
+
     }
 }
