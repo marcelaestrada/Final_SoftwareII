@@ -32,7 +32,12 @@ namespace SistemaVotos_FinalSoftware.Controllers
             return View();
         }
 
-        public IActionResult CrearCandidato(CandidatoInfo candidato)
+        public IActionResult CrearCandidato()
+        {
+            return View();
+        }
+
+        public IActionResult Votante()
         {
             return View();
         }
@@ -43,12 +48,21 @@ namespace SistemaVotos_FinalSoftware.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public async Task<ActionResult> nuevoCandidatoAsync(CandidatoInfo candidato)
+        public async Task<ActionResult> nuevoCandidato(CandidatoInfo candidato)
         {
             string jsonCandidato = JsonSerializer.Serialize(candidato);
             var content = new StringContent(jsonCandidato, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PostAsync("https://localhost:44347/api/Candidato/crear", content);
 
+
+            return View("Index");
+        }
+
+        public async Task<ActionResult> nuevoVoto(VotanteInfo votante)
+        {
+            string jsonCandidato = JsonSerializer.Serialize(votante);
+            var content = new StringContent(jsonCandidato, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync("https://localhost:44347/api/Votantes/nuevoVoto", content);
 
             return View("Index");
         }
